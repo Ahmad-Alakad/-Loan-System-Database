@@ -1,0 +1,68 @@
+--CREATE TEMP TABLESPACES AND ASSIGN EACH USER TO THE CORRESPONDING TEMP USING SYS--
+----------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
+
+--CREATE MANAGERS TEMP TABLESPACE--
+------------------------------------
+create temporary tablespace managers_temp 
+	tempfile '+FRA' size 10M;
+
+--CREATE EMPLOYEES TEMP TABLESPACE--
+------------------------------------
+create temporary tablespace employees_temp 
+	tempfile '+FRA' size 10M;
+
+--CREATE CUSTOMERS TEMP TABLESPACE--
+-----------------------------------
+create temporary tablespace customers_temp 
+	tempfile '+FRA' size 10M;
+
+--ADD MANAGERS TO THE MANAGERS TEMP TABLESPACE--
+-------------------------------------------------
+alter user SYSLOAN  
+	temporary tablespace managers_temp;
+
+alter user TEAM_LEADER
+	temporary tablespace managers_temp;
+
+alter user IT_MAN  
+	temporary tablespace managers_temp;
+
+alter user MANAGER  
+	temporary tablespace managers_temp;
+
+--ADD EMPLOYEES TO THE EMPLOYEES TEMP TABLESPACE--
+-------------------------------------------------
+alter user OBSERVER  
+	temporary tablespace employees_temp;
+
+alter user DATA_ANALYST  
+	temporary tablespace employees_temp;
+
+alter user DEVELOPER  
+	temporary tablespace employees_temp;
+
+alter user LAWYER
+	temporary tablespace employees_temp;
+
+alter user ACCOUNTANT
+	temporary tablespace employees_temp;
+
+alter user CUSTOMER_SERVICE
+	temporary tablespace employees_temp;
+
+
+--ADD CUSTOMERS TO THE CUSTOMERS TEMP TABLESPACE--
+-------------------------------------------------
+alter user LENDER
+	temporary tablespace customers_temp;
+
+alter user BORROWER
+	temporary tablespace customers_temp;
+
+alter user INTERMEDIARY
+	temporary tablespace customers_temp;
+
+alter user ADDRESSEE
+	temporary tablespace customers_temp;
+
