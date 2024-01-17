@@ -1,0 +1,24 @@
+--CREATE TABLESPACES USING SCHEMA OWNER "SYSLOAN"--
+-------------------------------------------------------
+-------------------------------------------------------
+
+--Create Loan Tablespace--
+------------------------------ 
+CREATE TABLESPACE loan 
+   DATAFILE '+DATA' SIZE 200M AUTOEXTEND OFF --NEXT M MAXSIZE M
+   EXTENT MANAGEMENT LOCAL AUTOALLOCATE
+   SEGMENT SPACE MANAGEMENT AUTO;
+
+--Create Users Tablespace--
+------------------------------ 
+CREATE TABLESPACE main_users 
+   DATAFILE '+DATA' SIZE 200M AUTOEXTEND OFF --NEXT M MAXSIZE M
+   EXTENT MANAGEMENT LOCAL AUTOALLOCATE
+   SEGMENT SPACE MANAGEMENT AUTO;
+
+--Create Request Tablespace--
+------------------------------ 
+CREATE TABLESPACE request 
+   DATAFILE '+DATA' SIZE 200M AUTOEXTEND OFF --NEXT M MAXSIZE M
+   EXTENT MANAGEMENT LOCAL AUTOALLOCATE
+   SEGMENT SPACE MANAGEMENT AUTO;

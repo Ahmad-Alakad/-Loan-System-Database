@@ -1,0 +1,106 @@
+--CREATE TABLESPACES USING SCHEMA OWNER "SYSLOAN"--
+-------------------------------------------------------
+-------------------------------------------------------
+
+--Create Loan Request Table--
+-------------------------------
+create table loan_request ( 
+lrid number(10),
+borrower_id number(10),
+datee date,
+deadline date NOT NULL,
+amount number(19) NOT NULL,
+description varchar(225) NOT NULL,
+payday date NOT NULL
+--constraint loan_request_pk primary key (lrid),
+--constrainit borrowerID_fk FOREIGN KEY (borrower_id) REFERENCES borrower(bid),
+)TABLESPACE request;
+
+--Create  Borrower Table--
+----------------------------
+create table borrower ( 
+bid number(10),
+namee varchar(225) NOT NULL,
+address varchar(225) NOT NULL,
+addresseeid number(10)
+--constraint borrower_id_pk primary key (bid),
+--constrainit addresseeid_fk FOREIGN KEY (addressee_id) REFERENCES addressee(aid)
+)TABLESPACE main_users;
+
+--Create Loan addressee Table--
+---------------------------------
+create table addressee ( 
+aid number(10),
+namee varchar(225) NOT NULL,
+address varchar(225) NOT NULL
+--constraint addressee_id_pk primary key (aid)
+)TABLESPACE main_users;
+
+--Create Loan Request Lender Table--
+--------------------------------------
+create table loan_request_lender ( 
+loan_request_date date,
+lender_id number(10),
+amount number(19) NOT NULL,
+loan_request_id number(10)
+--constraint loan_request_date_pk PRIMARY KEY (loan_request_date, lender_id, loan_request_id)
+--constrainit lender_id_fk FOREIGN KEY (lender_id) REFERENCES lender(lid),
+--constrainit loan_request_id_fk FOREIGN KEY (loan_request_id) REFERENCES loan_request(lrid),
+)TABLESPACE request;
+
+--Create Lender Borrower Table--
+----------------------------------
+create table lender_borrower ( 
+borrower_id number(10),
+lender_id number(10),
+loan_date date,
+percentage number(10),
+loan_id number(10)
+--constraint lender_borrower_pk PRIMARY KEY (borrower_id, lender_id, loan_date),
+--constrainit borrower_id_fk FOREIGN KEY (borrower_id) REFERENCES borrower(bid),
+--constrainit lender_id_fk FOREIGN KEY (lender_id) REFERENCES lender(lid),
+--constrainit loan_date_fk FOREIGN KEY (loan_date) REFERENCES loan(datee),
+--constrainit loan_id_fk FOREIGN KEY (loan_id) REFERENCES loan(lid),
+)TABLESPACE loan;
+
+--Create Lender Table--
+--------------------------
+create table lender ( 
+lid number(10),
+name varchar(225) NOT NULL,
+address varchar(225) NOT NULL,
+addressee_id number(10)
+--constraint lender_id_pk primary key (lid),
+--constrainit addressee_id_fk FOREIGN KEY (addressee_id) REFERENCES addressee(aid),
+)TABLESPACE main_users;
+
+--Create Repayment Table--
+----------------------------
+create table repayment ( 
+datee date,
+amount number(19) NOT NULL,
+loan_id number(10)
+--constraint repayment_pk PRIMARY KEY (datee, loan_id),
+--constrainit loan_id_fk FOREIGN KEY (loan_id) REFERENCES loan(lid),
+)TABLESPACE loan;
+
+--Create Loan Table--
+-------------------------
+create table loan ( 
+lid number(10),
+datee date,
+deadline_agreed_date date,
+repayment_date date
+--constraint loan_pk PRIMARY KEY (lid),
+--constrainit deadline_agreed_date_fk FOREIGN KEY (deadline_agreed_date) REFERENCES deadline(agreed_date),
+--constrainit repayment_date_fk FOREIGN KEY (repayment_date) REFERENCES repayment(datee),
+)TABLESPACE loan;
+
+--Create Deadline Table--
+----------------------------
+create table deadline ( 
+loan_id number(10),
+agreed_date date
+--constraint deadline_pk PRIMARY KEY (agreed_date, loan_id),
+--constrainit loan_id_fk FOREIGN KEY (loan_id) REFERENCES loan(lid),
+)TABLESPACE loan;

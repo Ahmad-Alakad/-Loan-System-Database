@@ -1,0 +1,10 @@
+--GIVE PRIVLLAGES USING SYS--
+-----------------------------
+-----------------------------
+
+--SCHEMA OWNER--
+-----------------
+GRANT CONNECT TO SYSLOAN;
+GRANT RESOURCE TO SYSLOAN;
+GRANT CREATE TABLESPACE TO SYSLOAN;
+GRANT CREATE VIEW TO SYSLOAN;
